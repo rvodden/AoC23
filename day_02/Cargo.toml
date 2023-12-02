@@ -1,7 +1,8 @@
 [package]
-name = "day_01"
+name = "day_02"
 version = "0.0.1"
 edition = "2021"
 
 [dependencies]
+nom = { workspace = true }
 rstest = { workspace = true }

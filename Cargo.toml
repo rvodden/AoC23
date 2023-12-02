@@ -1,0 +1,10 @@
+[workspace]
+resolver = "2"
+members = [
+    "day_*",
+    "aoclib"
+]
+
+[workspace.dependencies]
+nom = "7.1.3"
+rstest = "0.18.2"
