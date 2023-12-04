@@ -1,9 +1,10 @@
 [workspace]
 resolver = "2"
 members = [
-    "day_*",
+    "day-*",
     "aoclib"
 ]
+default-members = ["day-*"]
 
 [workspace.dependencies]
 nom = "7.1.3"

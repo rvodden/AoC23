@@ -16,6 +16,7 @@ RUN set -eux; \
 		ssh \
 		git \
 		curl \
+		libssl-dev \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -32,3 +33,6 @@ RUN echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN git clone --branch stable https://github.com/nojhan/liquidprompt.git ~/.liquidprompt
 # Only load Liquidprompt in interactive shells, not from a script or from scp
 RUN echo "[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt" >> ~/.bashrc
+
+USER vscode
+RUN cargo install just cargo-generate

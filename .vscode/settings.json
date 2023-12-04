@@ -1,0 +1,22 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./day-01/Cargo.toml",
+        "./day-02/Cargo.toml",
+        "./day-03/Cargo.toml",
+        "./day-04/Cargo.toml"
+    ],
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "rust-analyzer.debug.engine": "ms-vscode.cpptools",
+    "rust-analyzer.debug.engineSettings": {
+        "cppdbg": {
+            "miDebuggerPath": "${env:HOME}/.cargo/bin/rust-gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
+            ],
+        }
+    }
+}
