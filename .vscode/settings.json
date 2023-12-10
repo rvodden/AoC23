@@ -9,7 +9,7 @@
     "rust-analyzer.debug.engine": "ms-vscode.cpptools",
     "rust-analyzer.debug.engineSettings": {
         "cppdbg": {
-            "miDebuggerPath": "${env:HOME}/.cargo/bin/rust-gdb",
+            "miDebuggerPath": "/usr/bin/rust-gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

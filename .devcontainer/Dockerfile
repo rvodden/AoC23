@@ -12,11 +12,13 @@ RUN set -eux; \
 		sudo \
 		less \
 		ca-certificates \
+		bash-completion \
 		unzip \
 		ssh \
 		git \
 		curl \
 		libssl-dev \
+		rust-gdb \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -37,11 +39,22 @@ RUN useradd -ms /bin/bash vscode \
 
 RUN echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN git clone --branch stable https://github.com/nojhan/liquidprompt.git ~/.liquidprompt
-# Only load Liquidprompt in interactive shells, not from a script or from scp
-RUN echo '[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt' >> ~/.bashrc
+RUN git clone --branch stable https://github.com/nojhan/liquidprompt.git /root/.liquidprompt
+RUN echo '[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt' >> /root/.bashrc
 RUN echo 'export CARGO_HOME=/root/.cargo' >> /root/.bashrc
-RUN echo 'export CARGO_HOME=/home/vscode/.cargo' >> /home/vscode/.bashrc
+RUN mkdir -p /root/.local/share/bash-completion/completions/
+RUN printf '. <(rustup completions bash)\n'       >/root/.local/share/bash-completion/completions/rustup
+RUN printf '. <(rustup completions bash cargo)\n' >/root/.local/share/bash-completion/completions/cargo
+RUN CARGO_HOME=/root/.cargo cargo install just cargo-generate
+RUN echo 'export PATH=${PATH}:/root/.cargo/bin' > /root/.bashrc
 
 USER vscode
+RUN git clone --branch stable https://github.com/nojhan/liquidprompt.git /home/vscode/.liquidprompt
+RUN echo '[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt' >> /home/vscode/.bashrc
+RUN echo 'export CARGO_HOME=/home/vscode/.cargo' >> /home/vscode/.bashrc
+RUN echo 'export PATH=${PATH}:/home/vscode/.cargo/bin'
+RUN mkdir -p /home/vscode/.local/share/bash-completion/completions/
+RUN printf '. <(rustup completions bash)\n'       >/home/vscode/.local/share/bash-completion/completions/rustup
+RUN printf '. <(rustup completions bash cargo)\n' >/home/vscode/.local/share/bash-completion/completions/cargo
 RUN CARGO_HOME=/home/vscode/.cargo cargo install just cargo-generate
+RUN echo 'export PATH=${PATH}:/home/vscode/.cargo/bin' > /home/vscode/.bashrc

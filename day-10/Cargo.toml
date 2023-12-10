@@ -1,0 +1,9 @@
+[package]
+name = "day-10"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+glam = { workspace = true }
+nom = { workspace = true }
+rstest = { workspace = true }
