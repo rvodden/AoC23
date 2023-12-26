@@ -1,0 +1,11 @@
+[package]
+name = "day-24"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+nom = { workspace = true }
+rstest = { workspace = true }
+glam.workspace = true
+itertools.workspace = true
+nalgebra = "0.32.3"
